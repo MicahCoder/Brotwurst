@@ -3,12 +3,14 @@
  */
 package org.micahgruenwald.mandelbrotmultithread;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
-    }
+  public static void main(String[] args) {
+    testSingleMandelbrot();
+  }
+
+  public static void testSingleMandelbrot() {
+    MandelbrotThread mandelbrot = new MandelbrotThread(-2.0, -1.25, .5, 1.25, 0.01, 0.01);
+    mandelbrot.run();
+    
+  }
 }
