@@ -9,5 +9,6 @@
         "jdk.*",
         "org.graalvm.*",
         "io.micrometer.shaded.*"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "disabled"
 }

@@ -1,9 +1,9 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
 public class Calculator {
-  public static final int maxIterations = 100;
+  private static final int maxIterations = 100;
 
-  public static double mandlebrotValue(double y, double x) {
+  public static double mandelbrotValue(double x, double y) {
     double x2 = 0.0;
     double y2 = 0.0;
     double w = 0.0;

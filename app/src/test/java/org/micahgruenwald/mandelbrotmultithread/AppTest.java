@@ -3,14 +3,31 @@
  */
 package org.micahgruenwald.mandelbrotmultithread;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 class AppTest {
   public static void main(String[] args) {
     testSingleMandelbrot();
   }
 
   public static void testSingleMandelbrot() {
-    MandelbrotThread mandelbrot = new MandelbrotThread(-2.0, -1.25, .5, 1.25, 0.01, 0.01);
-    mandelbrot.run();
-    
+    BufferedImage image = new BufferedImage(250, 500, BufferedImage.TYPE_INT_RGB);
+    MandelbrotThread mandelbrot1 =
+        new MandelbrotThread(-2.0, -1.25, .5, 1.25, 0.01, 0.01, 0, 0, image);
+    MandelbrotThread mandelbrot2 =
+        new MandelbrotThread(-2.0, -1.25, .5, 1.25, 0.01, 0.01, 0, 250, image);
+    mandelbrot1.start();
+    mandelbrot2.start();
+
+    try {
+      File outputfile =
+          new File(
+              "app/src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png");
+      ImageIO.write(image, "png", outputfile);
+    } catch (IOException e) {
+    }
   }
 }
