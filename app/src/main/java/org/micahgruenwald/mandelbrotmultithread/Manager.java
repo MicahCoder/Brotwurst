@@ -37,7 +37,7 @@ public class Manager extends Thread{
         double dx = area.xWidth() / image.getWidth();
         double dy = area.xWidth() / image.getHeight();
         for(int i = 0; i<threadCount; i++){
-            threads.add(new )
+            // threads.add(new )
         }
 
     }

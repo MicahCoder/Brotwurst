@@ -37,4 +37,28 @@ public interface ColorMode{
             return (((int) (r * lightness) << 16) | ((int) (g * lightness) << 8) | ((int) (b * lightness)));
         }
     }
+    public record ComplexGradient(int[] colors, float[] positions) implements ColorMode{
+        @Override
+        public int calcColor(double position){
+            int out = colors[0];
+            for (int i = 1; i < positions.length; i++) {
+                if (position > positions[i - 1] && position <= positions[i]) {
+                    out = gradient(new Color(colors[i - 1]), new Color(colors[i]), positions[i], positions[i - 1], (float) position);
+                }
+            }
+            return out;
+        }
+        
+        private int gradient(Color start, Color end, float startX, float endX, float position) {
+            float length = endX - startX;
+            float startWeight = (position - startX) / length;
+            float endWeight = 1f - startWeight;
+            float r = (start.getRed() * startWeight + end.getRed() * endWeight);
+            float g = (start.getGreen() * startWeight + end.getGreen() * endWeight);
+            float b = (start.getBlue() * startWeight + end.getBlue() * endWeight);
+            return (int) r << 16 | (int) g << 8 | (int) b ;
+        }
   }
+
+  
+}
