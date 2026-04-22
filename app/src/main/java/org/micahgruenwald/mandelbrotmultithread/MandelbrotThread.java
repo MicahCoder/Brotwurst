@@ -7,59 +7,46 @@ public class MandelbrotThread extends Thread {
   private final double y0;
   private final double x1;
   private final double y1;
-  private final double dx;
-  private final double dy;
+
   private final BufferedImage image;
   private final int i0;
   private final int j0;
+    private final int i1;
+  private final int j1;
 
   public MandelbrotThread(
       double x0,
       double y0,
       double x1,
       double y1,
-      double dx,
-      double dy,
       int i0,
       int j0,
+      int i1,
+      int j1,
       BufferedImage image) {
     this.x0 = x0;
     this.y0 = y0;
-    this.x1 = x1 - dx;
-    this.y1 = y1 - dy;
-    this.dx = dx;
-    this.dy = dy;
+    this.x1 = x1;
+    this.y1 = y1;
     this.i0 = i0;
     this.j0 = j0;
+    this.i1 = i1;
+    this.j1 = j1;
     this.image = image;
-  }
-
-  public MandelbrotThread(double x0, double y0, double x1, double y1, double dx, double dy) {
-    this(
-        x0,
-        y0,
-        x1,
-        y1,
-        dx,
-        dy,
-        0,
-        0,
-        new BufferedImage(
-            (int) ((x1 - x0) / dx), (int) ((y1 - y0) / dy), BufferedImage.TYPE_INT_RGB));
   }
 
   @Override
   public void run() {
-    int i = i0;
-    int j;
-    for (double x = x0; x <= x1; x += dx) {
-      j = j0;
-      for (double y = y0; y < y1; y += dy) {
-        // image.setRGB(i, j, ((gray << 16) | (gray << 8) | gray));
+    double dx = (x1 - x0)/(i1 - i0);
+    double dy = (y1 - y0)/(j1 - j0);
+    double x = x0;
+    double y = y0;
+    for (int i = i0; i < i1; i++) {
+      for (int j = j0; j < j1; j++) {
         image.setRGB(i, j, Calculator.getColorCalc().calcColor(Calculator.mandelbrotValue(x, y)));
-        j++;
+        x+= dx;
       }
-      i++;
+      y+=dy;
     }
   }
 
