@@ -4,6 +4,10 @@ package org.micahgruenwald.mandelbrotmultithread;
 public class Calculator {
   private static int maxIterations = 100;
   private static ColorMode COLOR_CALC= ColorMode.HSV_WITH_BLACK;
+  private static double cx = -.4;
+  private static double cy = .6;
+  private static int n = 2;
+  private static int  R = escapeRadius(cx, cy, n);
 //new ColorMode.ComplexGradient(new int[]{new Color(1.0f, 0.0f, 0.0f).getRGB(),new Color(0.0f, 1.0f,0.0f).getRGB()}, new float[]{0.0f, 1.0f});
   public static double mandelbrotValue(double x, double y) {
     double x2 = 0.0;
@@ -21,6 +25,30 @@ public class Calculator {
       iteration++;
     }
     return (double) iteration / maxIterations;
+  }
+
+  public static double juliaValue(double x, double y) {
+    int iteration = 0;
+    // System.out.print("RInit: " + R);
+    while (x*x + y*y < R * R && iteration < maxIterations) {
+      double xTemp = x*x - y*y;
+      y = 2*x*y + cy;
+      x = xTemp + cx;
+      iteration++;
+    }
+    return (double) iteration / maxIterations;
+  }
+  // n is the order of the julia set. n = 2 is the normal julia set. 
+  public static int escapeRadius(double cx,double cy, int n){
+    int r = 1;
+    double v =Math.sqrt(cx*cx + cy*cy);
+    System.out.println(v);
+    while(Math.pow(r,n) - r < v){
+      System.out.println(Math.pow(r,n));
+      r++;
+    }
+    System.out.println("RFinal: " + r);
+    return r;
   }
 
 
