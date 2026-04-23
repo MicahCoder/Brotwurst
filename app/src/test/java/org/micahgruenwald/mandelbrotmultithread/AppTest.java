@@ -58,10 +58,10 @@ class AppTest {
         try {
           manager.join();
           System.out.println("Runtime: " + (System.nanoTime() - ti) * 1e-9);
-      File outputfile =
+      File outputFile =
           new File(
               "app/src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png");
-      ImageIO.write(image, "png", outputfile);
+      ImageIO.write(image, "png", outputFile);
     } catch (IOException | InterruptedException e) {
     }
   }
