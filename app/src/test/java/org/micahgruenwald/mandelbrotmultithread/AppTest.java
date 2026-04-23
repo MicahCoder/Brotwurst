@@ -51,7 +51,7 @@ class AppTest {
   public static void testManager(){
     long ti = System.nanoTime();
         System.out.println("Processors: "+Runtime.getRuntime().availableProcessors());
-    BufferedImage image = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
+    BufferedImage image = new BufferedImage(350, 350, BufferedImage.TYPE_INT_RGB);
     Manager manager = new Manager(8, new RenderArea(-0.75, 0, 2.5,2.5), image);
 
     manager.start();

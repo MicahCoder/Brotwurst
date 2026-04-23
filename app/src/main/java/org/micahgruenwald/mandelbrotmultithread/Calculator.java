@@ -1,12 +1,10 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
-import java.awt.Color;
-
 
 public class Calculator {
   private static int maxIterations = 100;
-  private static ColorMode COLOR_CALC= new ColorMode.ComplexGradient(new int[]{new Color(1.0f, 0.0f, 0.0f).getRGB(),new Color(0.0f, 1.0f,0.0f).getRGB()}, new float[]{0.0f, 1.0f});
-
+  private static ColorMode COLOR_CALC= ColorMode.HSV_WITH_BLACK;
+//new ColorMode.ComplexGradient(new int[]{new Color(1.0f, 0.0f, 0.0f).getRGB(),new Color(0.0f, 1.0f,0.0f).getRGB()}, new float[]{0.0f, 1.0f});
   public static double mandelbrotValue(double x, double y) {
     double x2 = 0.0;
     double y2 = 0.0;
