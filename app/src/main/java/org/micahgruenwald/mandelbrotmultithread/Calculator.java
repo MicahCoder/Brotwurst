@@ -8,8 +8,13 @@ public class Calculator {
   private static double cy = .156;
   private static int n = 2;
   private static int  R = escapeRadius(cx, cy, n);
+  public static boolean juliaMode = true;
 //new ColorMode.ComplexGradient(new int[]{new Color(1.0f, 0.0f, 0.0f).getRGB(),new Color(0.0f, 1.0f,0.0f).getRGB()}, new float[]{0.0f, 1.0f});
-  public static double mandelbrotValue(double x, double y) {
+public static double render(double x, double y){
+  return juliaMode ? juliaValue(x, y): mandelbrotValue(x, y);
+}  
+
+public static double mandelbrotValue(double x, double y) {
     double x2 = 0.0;
     double y2 = 0.0;
     double w = 0.0;

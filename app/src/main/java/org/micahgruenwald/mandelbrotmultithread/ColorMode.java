@@ -8,7 +8,6 @@ public interface ColorMode {
     public abstract int calcColor(double lightness);
 
     public static final ColorMode ORANGE_BLACK_BLUE = new ComplexGradient(new int[]{new Color(0, 7, 100).getRGB(), new Color( 32, 107, 203).getRGB(), new Color(237, 255, 255).getRGB(), new Color(255, 170,   0).getRGB(), new Color(  0,   2,   0).getRGB(), new Color(  0,   2,   0).getRGB()}, new float[]{0.0f,0.16f,0.42f,0.6425f,0.8575f,1.0f});
-
     public static final ColorMode RANDOM = new ColorMode() {
         private int randomOffset = new Random().nextInt();
 
