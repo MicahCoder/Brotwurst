@@ -57,6 +57,11 @@ public class Manager extends Thread{
         for(Thread thread:threads){
             thread.start();
         }
+        try{
+        for(Thread thread:threads){
+            thread.join();
+        }
+        }catch(InterruptedException e){};
 
     }
 }

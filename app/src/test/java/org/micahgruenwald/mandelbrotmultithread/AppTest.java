@@ -50,16 +50,17 @@ class AppTest {
 
   public static void testManager(){
     long ti = System.nanoTime();
-    BufferedImage image = new BufferedImage(101, 101, BufferedImage.TYPE_INT_RGB);
-    Manager manager = new Manager(8, new RenderArea(-0.75, 0, 2.5,2.5), image);
-    manager.run();
+    BufferedImage image = new BufferedImage(10000, 10000, BufferedImage.TYPE_INT_RGB);
+    Manager manager = new Manager(20, new RenderArea(-0.75, 0, 2.5,2.5), image);
+    manager.start();
     System.out.println("Runtime: " + (System.nanoTime() - ti) * 1e-9);
         try {
+          manager.join();
       File outputfile =
           new File(
               "app/src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png");
       ImageIO.write(image, "png", outputfile);
-    } catch (IOException e) {
+    } catch (IOException | InterruptedException e) {
     }
   }
 }
