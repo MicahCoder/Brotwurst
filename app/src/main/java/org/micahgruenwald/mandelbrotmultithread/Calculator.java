@@ -2,10 +2,10 @@ package org.micahgruenwald.mandelbrotmultithread;
 
 
 public class Calculator {
-  private static int maxIterations = 100;
+  private static int maxIterations = 300;
   private static ColorMode COLOR_CALC= ColorMode.HSV_WITH_BLACK;
-  private static double cx = -.4;
-  private static double cy = .6;
+  private static double cx = -.8;
+  private static double cy = .156;
   private static int n = 2;
   private static int  R = escapeRadius(cx, cy, n);
 //new ColorMode.ComplexGradient(new int[]{new Color(1.0f, 0.0f, 0.0f).getRGB(),new Color(0.0f, 1.0f,0.0f).getRGB()}, new float[]{0.0f, 1.0f});

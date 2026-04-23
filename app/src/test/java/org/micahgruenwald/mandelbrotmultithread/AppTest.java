@@ -8,21 +8,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class AppTest {
   public static void main(String[] args) {
     // testSingleMandelbrot();
@@ -52,13 +37,13 @@ class AppTest {
     long ti = System.nanoTime();
         System.out.println("Processors: "+Runtime.getRuntime().availableProcessors());
     BufferedImage image = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
-    Calculator.setColorMode(ColorMode.BLACK_AND_WHITE);
+    Calculator.setColorMode(ColorMode.ORANGE_BLACK_BLUE);
     Manager manager = new Manager(8, new RenderArea(0,0, 3,3), image);
 
     manager.start();
-        try {
-          manager.join();
-          System.out.println("Runtime: " + (System.nanoTime() - ti) * 1e-9);
+    try {
+      manager.join();
+      System.out.println("Runtime: " + (System.nanoTime() - ti) * 1e-9);
       File outputFile =
           new File(
               "app/src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png");
