@@ -24,7 +24,7 @@ public interface ColorMode{
         if (lightness == 1) {
           return 0;
         }
-        return  Color.HSBtoRGB((float) lightness * 10, 1, .9f);
+        return  Color.HSBtoRGB((float) lightness * 10, 1, 1);
     };
 
     public static final ColorMode BLACK_AND_WHITE = (double lightness) -> {
@@ -34,7 +34,7 @@ public interface ColorMode{
     public record SimpleGradient(float r, float g, float b) implements ColorMode{
         @Override
         public int calcColor(double lightness){
-            return (((int) (r * lightness) << 16) | ((int) (g * lightness) << 8) | ((int) (b * lightness)));
+            return (((int) (r * lightness *255) << 16) | ((int) (g * lightness*255) << 8) | ((int) (b * lightness*255)));
         }
     }
     public record ComplexGradient(int[] colors, float[] positions) implements ColorMode{

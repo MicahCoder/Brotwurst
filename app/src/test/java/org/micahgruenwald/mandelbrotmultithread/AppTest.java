@@ -52,7 +52,8 @@ class AppTest {
     long ti = System.nanoTime();
         System.out.println("Processors: "+Runtime.getRuntime().availableProcessors());
     BufferedImage image = new BufferedImage(350, 350, BufferedImage.TYPE_INT_RGB);
-    Manager manager = new Manager(8, new RenderArea(-0.75, 0, 2.5,2.5), image);
+    Calculator.setColorMode(ColorMode.RANDOM);
+    Manager manager = new Manager(8, new RenderArea(-0.10715091471597,- 0.91210539052909, 0.001,0.001), image);
 
     manager.start();
         try {
