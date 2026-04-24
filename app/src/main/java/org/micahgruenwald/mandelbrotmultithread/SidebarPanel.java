@@ -51,10 +51,44 @@ class SidebarPanel extends QWidget {
           imageView.setImage(map);
         });
 
+    QComboBox fractalType = new QComboBox();
+    fractalType.addItem("Mandelbrot");
+    fractalType.addItem("Julia");
+
+    colorChoices.currentIndexChanged.connect(
+        (i) -> {
+          ColorMode mode =
+              switch (i) {
+                case 0 -> ColorMode.ORANGE_BLACK_BLUE;
+                case 1 -> ColorMode.RANDOM;
+                case 2 -> ColorMode.HSV_WITH_BLACK;
+                case 3 -> ColorMode.BLACK_AND_WHITE;
+                default -> ColorMode.BLACK_AND_WHITE;
+              };
+          Calculator.setColorMode(mode);
+          manager.render();
+          QPixmap map = manager.getQPixmap();
+          imageView.setImage(map);
+        });
+
+        fractalType.currentIndexChanged.connect(
+        (i) -> {
+          if(i == 0){
+            Calculator.setJuliaMode(false);
+          }else{
+            Calculator.setJuliaMode(true);
+          }
+          manager.render();
+          imageView.setImage(manager.getQPixmap());
+        });
+    
     zoomInButton.clicked.connect(imageView::zoomIn);
     zoomOutButton.clicked.connect(imageView::zoomOut);
     resetZoomButton.clicked.connect(imageView::resetZoom);
+    sidebarLayout.addWidget(new QLabel("Color Choices"));
     sidebarLayout.addWidget(colorChoices);
+    sidebarLayout.addWidget(new QLabel("Fractal Type Choices"));
+    sidebarLayout.addWidget(fractalType);
     sidebarLayout.addStretch(1);
 
     setLayout(sidebarLayout);
