@@ -16,7 +16,7 @@ public class App {
     QApplication.initialize(args);
 
     QWidget window = new QWidget();
-    window.setWindowTitle("Test Window");
+    window.setWindowTitle("Mandelbrot Renderer");
     window.resize(900, 600);
 
     QHBoxLayout mainLayout = new QHBoxLayout(window);
