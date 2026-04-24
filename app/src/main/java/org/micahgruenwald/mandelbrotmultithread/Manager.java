@@ -13,7 +13,7 @@ public class Manager{
     private final BufferedImage image;
     private final int threadCount;
     private final ArrayList<MandelbrotThread> threads;
-    private final RenderArea area;
+    private RenderArea area;
     public Manager(int threadCount, RenderArea area, BufferedImage image){
         this.threadCount = threadCount;
         this.image = image;
@@ -34,7 +34,9 @@ public class Manager{
         }
         return rowLengths;
     }
-
+    public void setRenderArea(RenderArea renderArea){
+        this.area = renderArea;
+    }
     public void render(){
         ArrayList<Integer> rowLengths = rowLengths(image.getHeight(), threadCount);
         threads.clear();

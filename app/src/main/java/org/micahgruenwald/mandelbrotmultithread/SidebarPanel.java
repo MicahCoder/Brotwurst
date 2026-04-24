@@ -5,13 +5,16 @@ import io.qt.widgets.QComboBox;
 import io.qt.widgets.QHBoxLayout;
 import io.qt.widgets.QLabel;
 import io.qt.widgets.QPushButton;
+import io.qt.widgets.QSpinBox;
 import io.qt.widgets.QVBoxLayout;
 import io.qt.widgets.QWidget;
 
 class SidebarPanel extends QWidget {
   private Manager manager;
+  private ZoomableCropImageView imageView;
   SidebarPanel(ZoomableCropImageView imageView, Manager manager) {
     this.manager = manager;
+    this.imageView = imageView;
     QVBoxLayout sidebarLayout = new QVBoxLayout();
     QLabel titleLabel = new QLabel("Mandelbrot Explorer");
     titleLabel.font().setPixelSize(25);
@@ -28,6 +31,16 @@ class SidebarPanel extends QWidget {
     zoomButtonsLayout.addWidget(zoomOutButton);
     zoomButtonsLayout.addWidget(resetZoomButton);
     sidebarLayout.addLayout(zoomButtonsLayout); 
+
+    QSpinBox iterationNumber = new QSpinBox();
+    iterationNumber.setSingleStep(10);
+    iterationNumber.setRange(10, 1000);
+    iterationNumber.setValue(100);
+
+    iterationNumber.valueChanged.connect((i)->{
+      Calculator.setMaxIterations(i);
+      renderWindow();
+    });
 
     QComboBox colorChoices = new QComboBox();
     colorChoices.addItem("Orange Black and Blue");
@@ -66,20 +79,19 @@ class SidebarPanel extends QWidget {
                 default -> ColorMode.BLACK_AND_WHITE;
               };
           Calculator.setColorMode(mode);
-          manager.render();
-          QPixmap map = manager.getQPixmap();
-          imageView.setImage(map);
+          renderWindow();
         });
 
         fractalType.currentIndexChanged.connect(
         (i) -> {
           if(i == 0){
+            manager.setRenderArea(new RenderArea(-0.75, 0.0, 2.5,2.5));
             Calculator.setJuliaMode(false);
           }else{
+            manager.setRenderArea(new RenderArea(0.0, 0.0, 3.5,3.5));
             Calculator.setJuliaMode(true);
           }
-          manager.render();
-          imageView.setImage(manager.getQPixmap());
+          renderWindow();
         });
     
     zoomInButton.clicked.connect(imageView::zoomIn);
@@ -89,9 +101,16 @@ class SidebarPanel extends QWidget {
     sidebarLayout.addWidget(colorChoices);
     sidebarLayout.addWidget(new QLabel("Fractal Type Choices"));
     sidebarLayout.addWidget(fractalType);
+    sidebarLayout.addWidget(new QLabel("Max Iterations"));
+    sidebarLayout.addWidget(iterationNumber);
     sidebarLayout.addStretch(1);
 
     setLayout(sidebarLayout);
     setMinimumWidth(160);
+  }
+
+  private void renderWindow(){
+    manager.render();
+    imageView.setImage(manager.getQPixmap());
   }
 }

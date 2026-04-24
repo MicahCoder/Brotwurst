@@ -1,18 +1,15 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
-import io.qt.core.Qt;
-import io.qt.gui.QPixmap;
-import io.qt.widgets.*;
-import io.qt.widgets.QApplication;
-import io.qt.widgets.QComboBox;
-import io.qt.widgets.QHBoxLayout;
-import io.qt.widgets.QPushButton;
-import io.qt.widgets.QSizePolicy;
-import io.qt.widgets.QVBoxLayout;
-import io.qt.widgets.QWidget;
 import java.awt.image.BufferedImage;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import io.qt.core.Qt;
+import io.qt.widgets.QApplication;
+import io.qt.widgets.QHBoxLayout;
+import io.qt.widgets.QSizePolicy;
+import io.qt.widgets.QSplitter;
+import io.qt.widgets.QWidget;
 
 public class App {
   public static void main(String[] args) {
@@ -27,8 +24,8 @@ public class App {
     Calculator.setColorMode(ColorMode.ORANGE_BLACK_BLUE);
     Calculator.setJuliaValues(-0.4, 0.6, 2);
     Calculator.setMaxIterations(200);
-    Calculator.setJuliaMode(true);
-    Manager manager = new Manager(8, new RenderArea(0, 0, 3.5, 3.5), image);
+    Calculator.setJuliaMode(false);
+    Manager manager = new Manager(8, new RenderArea(-0.75, 0, 2.5, 2.5), image);
 
     manager.render();
 
