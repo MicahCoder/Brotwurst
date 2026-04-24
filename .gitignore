@@ -6,3 +6,8 @@ build
 
 # Ignore Kotlin plugin data
 .kotlin
+
+launch.json
+app/.qtcreator/project.json
+.DS_Store
+app/.qtcreator/project.json.user

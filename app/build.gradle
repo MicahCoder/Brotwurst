@@ -24,7 +24,21 @@ dependencies {
     // This dependency is used by the application.
     implementation libs.guava
     implementation libs.qtjambi
-    runtimeOnly libs.qtjambi.native.linux.x64
+
+    def osName = System.getProperty('os.name').toLowerCase()
+    def osArch = System.getProperty('os.arch').toLowerCase()
+
+    if (osName.contains('mac')) {
+        runtimeOnly libs.qtjambi.native.macos
+    } else if (osName.contains('linux')) {
+        if (osArch.contains('aarch64') || osArch.contains('arm64')) {
+            runtimeOnly libs.qtjambi.native.linux.arm64
+        } else {
+            runtimeOnly libs.qtjambi.native.linux.x64
+        }
+    } else {
+        throw new GradleException("Unsupported OS for Qt Jambi native runtime: ${osName} (${osArch})")
+    }
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

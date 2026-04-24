@@ -6,9 +6,13 @@ guava = "33.5.0-jre"
 junit-jupiter = "6.0.1"
 qtjambi = "6.11.0"
 qtjambi-native-linux-x64 = "6.11.0"
+qtjambi-native-linux-arm64 = "6.11.0"
+qtjambi-native-macos = "6.11.0"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
 qtjambi = { module = "io.qtjambi:qtjambi", version.ref = "qtjambi" }
 qtjambi-native-linux-x64 = { module = "io.qtjambi:qtjambi-native-linux-x64", version.ref = "qtjambi-native-linux-x64" }
+qtjambi-native-linux-arm64 = { module = "io.qtjambi:qtjambi-native-linux-arm64", version.ref = "qtjambi-native-linux-arm64" }
+qtjambi-native-macos = { module = "io.qtjambi:qtjambi-native-macos", version.ref = "qtjambi-native-macos" }
