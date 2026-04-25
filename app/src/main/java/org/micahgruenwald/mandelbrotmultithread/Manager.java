@@ -20,6 +20,9 @@ public class Manager{
         this.area = area;
         threads = new ArrayList<>(threadCount);
     }
+    public BufferedImage getImage(){
+        return image;
+    }
 
     private static ArrayList<Integer> rowLengths(int dividend, int divisor){
         ArrayList<Integer> rowLengths = new ArrayList<>(divisor);

@@ -179,12 +179,25 @@ class SidebarPanel extends QWidget {
    
     QHBoxLayout simpleGradient = new QHBoxLayout();
     simpleGradient.setSpacing(25);
+    QPushButton saveButton = new QPushButton("Save");
 
-    simpleGradient.addWidget(color1);
-    simpleGradient.addWidget(color2);
+    SavePopup savePopup = new SavePopup(this, manager);
     zoomInButton.clicked.connect(imageView::zoomIn);
     zoomOutButton.clicked.connect(imageView::zoomOut);
     resetZoomButton.clicked.connect(imageView::resetZoom);
+    saveButton.clicked.connect(savePopup::exec);
+    // saveButton.clicked.connect(()->{
+    //   try {
+    //   File outputfile =
+    //       new File(
+    //           "app/src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png");
+    //   ImageIO.write(manager.getImage(), "png", outputfile);
+    // } catch (IOException e) {
+    // }
+    // });
+
+
+
     sidebarLayout.addWidget(new QLabel("Color Choices"));
     sidebarLayout.addWidget(colorChoices);
     sidebarLayout.addLayout(simpleGradient);
@@ -194,6 +207,7 @@ class SidebarPanel extends QWidget {
     sidebarLayout.addLayout(cxcyn); 
     sidebarLayout.addWidget(new QLabel("Max Iterations"));
     sidebarLayout.addWidget(iterationNumber);
+    sidebarLayout.addWidget(saveButton);
     sidebarLayout.addStretch(1);
 
     setLayout(sidebarLayout);
