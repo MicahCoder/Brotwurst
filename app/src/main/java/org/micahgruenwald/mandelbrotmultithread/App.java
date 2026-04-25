@@ -29,7 +29,7 @@ public class App {
 
     manager.render();
 
-    ZoomableCropImageView imageView = new ZoomableCropImageView();
+    ZoomableCropImageView imageView = new ZoomableCropImageView(manager);
     imageView.setImage(manager.getQPixmap());
     imageView.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding);
     imageView.setMinimumSize(1, 1);

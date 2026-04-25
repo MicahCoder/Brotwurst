@@ -37,6 +37,10 @@ public class Manager{
     public void setRenderArea(RenderArea renderArea){
         this.area = renderArea;
     }
+
+    public RenderArea getRenderArea(){
+        return area;
+    }
     public void render(){
         ArrayList<Integer> rowLengths = rowLengths(image.getHeight(), threadCount);
         threads.clear();

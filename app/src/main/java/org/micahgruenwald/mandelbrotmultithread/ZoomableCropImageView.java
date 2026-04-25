@@ -13,8 +13,11 @@ class ZoomableCropImageView extends QWidget {
     private double zoomFactor = 1.0;
     private static final double ZOOM_STEP = 1.15;
     private static final double MAX_ZOOM = 20.0;
+    private final Manager manager;
 
-    ZoomableCropImageView() {
+
+    public ZoomableCropImageView(Manager manager) {
+      this.manager = manager;
       setFocusPolicy(Qt.FocusPolicy.StrongFocus);
     }
 
@@ -32,11 +35,16 @@ class ZoomableCropImageView extends QWidget {
     }
 
     void zoomIn() {
-      setZoom(zoomFactor * ZOOM_STEP);
+      // setZoom(zoomFactor * ZOOM_STEP);
+      double xWidth = manager.getRenderArea().xWidth();
+      double yWidth = manager.getRenderArea().yWidth();
+      double x = manager.getRenderArea().xCenter();
+      double y = manager.getRenderArea().yCenter();
+      manager.setRenderArea(new RenderArea(x,y,xWidth,yWidth));
     }
 
     void zoomOut() {
-      setZoom(zoomFactor / ZOOM_STEP);
+      // setZoom(zoomFactor / ZOOM_STEP);
     }
 
     void resetZoom() {
