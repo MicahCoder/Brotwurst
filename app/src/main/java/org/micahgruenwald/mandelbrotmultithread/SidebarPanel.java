@@ -1,5 +1,10 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import io.qt.gui.QPixmap;
 import io.qt.widgets.QComboBox;
 import io.qt.widgets.QDoubleSpinBox;
@@ -141,11 +146,21 @@ class SidebarPanel extends QWidget {
     cxcyn.addWidget(cy);
     cxcyn.addWidget(n);
    
+    QPushButton saveButton = new QPushButton("save");
 
-
+    
     zoomInButton.clicked.connect(imageView::zoomIn);
     zoomOutButton.clicked.connect(imageView::zoomOut);
     resetZoomButton.clicked.connect(imageView::resetZoom);
+    saveButton.clicked.connect(()->{
+      try {
+      File outputfile =
+          new File(
+              "app/src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png");
+      ImageIO.write(manager.getImage(), "png", outputfile);
+    } catch (IOException e) {
+    }
+    });
     sidebarLayout.addWidget(new QLabel("Color Choices"));
     sidebarLayout.addWidget(colorChoices);
     sidebarLayout.addWidget(new QLabel("Fractal Type Choices"));
@@ -154,6 +169,7 @@ class SidebarPanel extends QWidget {
     sidebarLayout.addLayout(cxcyn); 
     sidebarLayout.addWidget(new QLabel("Max Iterations"));
     sidebarLayout.addWidget(iterationNumber);
+        sidebarLayout.addWidget(saveButton);
     sidebarLayout.addStretch(1);
 
     setLayout(sidebarLayout);
