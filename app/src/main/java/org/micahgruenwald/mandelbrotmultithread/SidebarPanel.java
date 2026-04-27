@@ -55,16 +55,16 @@ class SidebarPanel extends QWidget {
 
     cx.valueChanged.connect((i)->{
       Calculator.setJuliaValues(cx.value(), cy.value(), n.value());
-      renderWindow();
+      renderWindow(false);
     });
 
     cy.valueChanged.connect((i)->{
       Calculator.setJuliaValues(cx.value(), cy.value(), n.value());
-      renderWindow();
+      renderWindow(false);
     });
     n.valueChanged.connect((i)->{
       Calculator.setJuliaValues(cx.value(), cy.value(), n.value());
-      renderWindow();
+      renderWindow(false);
     });
 
     cy.setVisible(false);
@@ -73,7 +73,7 @@ class SidebarPanel extends QWidget {
     
     iterationNumber.valueChanged.connect((i)->{
       Calculator.setMaxIterations(i);
-      renderWindow();
+      renderWindow(false);
     });
 
     QComboBox colorChoices = new QComboBox();
@@ -128,9 +128,7 @@ class SidebarPanel extends QWidget {
           color2.hide();
           Calculator.setColorMode(mode);
           }
-          manager.render();
-          QPixmap map = manager.getQPixmap();
-          imageView.setImage(map);
+          renderWindow(false);
         });
 
     QComboBox fractalType = new QComboBox();
@@ -169,7 +167,7 @@ class SidebarPanel extends QWidget {
             cxLabel.setVisible(true);
             nLabel.setVisible(true);
           }
-          renderWindow();
+          renderWindow(false);
         });
     QHBoxLayout cxcyn = new QHBoxLayout();
     cxcyn.setSpacing(5);
@@ -214,8 +212,10 @@ class SidebarPanel extends QWidget {
     setMinimumWidth(160);
   }
 
-  private void renderWindow(){
+  private void renderWindow(boolean moving){
+    manager.setImage(moving?App.movingImage:App.stationaryImage);
     manager.render();
     imageView.setImage(manager.getQPixmap());
   }
+
 }

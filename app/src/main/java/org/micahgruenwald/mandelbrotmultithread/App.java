@@ -12,6 +12,9 @@ import io.qt.widgets.QSplitter;
 import io.qt.widgets.QWidget;
 
 public class App {
+
+  public static final BufferedImage movingImage = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
+  public static final BufferedImage stationaryImage = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
   public static void main(String[] args) {
     QApplication.initialize(args);
 
@@ -20,12 +23,11 @@ public class App {
     window.resize(900, 600);
 
     QHBoxLayout mainLayout = new QHBoxLayout(window);
-    BufferedImage image = new BufferedImage(700, 700, BufferedImage.TYPE_INT_RGB);
     Calculator.setColorMode(ColorMode.ORANGE_BLACK_BLUE);
     Calculator.setJuliaValues(-0.4, 0.6, 2);
     Calculator.setMaxIterations(200);
     Calculator.setJuliaMode(false);
-    Manager manager = new Manager(6, Calculator.DEFAULT_MANDELBROT_AREA, image);
+    Manager manager = new Manager(6, Calculator.DEFAULT_MANDELBROT_AREA, stationaryImage);
 
     manager.render();
 

@@ -2,6 +2,7 @@ package org.micahgruenwald.mandelbrotmultithread;
 
 import io.qt.core.QPoint;
 import io.qt.core.QPointF;
+import io.qt.core.QTimer;
 import io.qt.core.Qt;
 import io.qt.gui.QCursor;
 import io.qt.gui.QKeyEvent;
@@ -15,6 +16,7 @@ class ZoomableCropImageView extends QWidget {
     private QPixmap image;
     private String errorText = "No image loaded";
     private double zoomFactor = 1.0;
+    private QTimer timer;
     private static final double ZOOM_STEP = 1.15;
     private static final double MAX_ZOOM = 20.0;
     private static final double DRAG_FACT = 0.01;
@@ -25,6 +27,10 @@ class ZoomableCropImageView extends QWidget {
     public ZoomableCropImageView(Manager manager) {
       this.manager = manager;
       setFocusPolicy(Qt.FocusPolicy.StrongFocus);
+      timer = new QTimer();
+      timer.setInterval(100);
+      timer.setSingleShot(true);
+      timer.timeout.connect(()->renderWindow(false));
     }
 
     void setImage(QPixmap pixmap) {
@@ -49,7 +55,7 @@ class ZoomableCropImageView extends QWidget {
       double x = cartPose.x() - (cartPose.x() - area.xCenter()) * ZOOM_STEP;
       double y = cartPose.y() - (cartPose.y() - area.yCenter()) * ZOOM_STEP;
       manager.setRenderArea(new RenderArea(x,y,xWidth,yWidth));
-      manager.render();
+      renderWindow(true);
       setImage(manager.getQPixmap());
     }
 
@@ -62,7 +68,7 @@ class ZoomableCropImageView extends QWidget {
       double x = cartPose.x() - (cartPose.x() - area.xCenter()) / ZOOM_STEP;
       double y = cartPose.y() - (cartPose.y() - area.yCenter()) / ZOOM_STEP;
       manager.setRenderArea(new RenderArea(x,y,xWidth,yWidth));
-      manager.render();
+      renderWindow(true);
       setImage(manager.getQPixmap());
     }
 
@@ -72,8 +78,7 @@ class ZoomableCropImageView extends QWidget {
       }else{
         manager.setRenderArea(Calculator.DEFAULT_MANDELBROT_AREA);
       }
-      manager.render();
-      setImage(manager.getQPixmap());
+      renderWindow(false);
     }
 
     private void setZoom(double zoom) {
@@ -142,22 +147,22 @@ class ZoomableCropImageView extends QWidget {
         case 0x01000013: //Up
             area = new RenderArea(area.xCenter(), area.yCenter() - DRAG_FACT * area.yWidth(), area.xWidth(), area.yWidth());
             manager.setRenderArea(area);
-            render();
+            renderWindow(true);
             break;
         case 0x01000014://Right
             area = new RenderArea(area.xCenter() + DRAG_FACT * area.xWidth(), area.yCenter(), area.xWidth(), area.yWidth());
             manager.setRenderArea(area);
-            render();
+            renderWindow(true);
             break;
         case 0x01000015: //Down
             area = new RenderArea(area.xCenter() , area.yCenter()+ DRAG_FACT * area.yWidth(), area.xWidth(), area.yWidth());
             manager.setRenderArea(area);
-            render();
+            renderWindow(true);
             break;
         case 0x01000012: //Left
             area = new RenderArea(area.xCenter() - DRAG_FACT * area.xWidth(), area.yCenter(), area.xWidth(), area.yWidth());
             manager.setRenderArea(area);
-            render();
+            renderWindow(true);
             break;
         default:
           break;
@@ -215,8 +220,16 @@ class ZoomableCropImageView extends QWidget {
 
     }
 
-    public void render(){
-      manager.render();
-      setImage(manager.getQPixmap());
+  private void renderWindow(boolean moving){
+    if(moving){
+      timer.start();
+      manager.setImage(App.movingImage);
+    }else{
+      manager.setImage(App.stationaryImage);
     }
+    manager.render();
+    setImage(manager.getQPixmap());
+  }
+
+
   }

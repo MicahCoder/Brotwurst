@@ -10,7 +10,7 @@ import io.qt.core.QSize;
 import io.qt.gui.QPixmap;
 
 public class Manager{
-    private final BufferedImage image;
+    private BufferedImage image;
     private final int threadCount;
     private final ArrayList<MandelbrotThread> threads;
     private RenderArea area;
@@ -22,6 +22,10 @@ public class Manager{
     }
     public BufferedImage getImage(){
         return image;
+    }
+
+    public void setImage(BufferedImage image){
+        this.image = image;
     }
 
     private static ArrayList<Integer> rowLengths(int dividend, int divisor){
