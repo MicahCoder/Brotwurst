@@ -82,6 +82,7 @@ class SidebarPanel extends QWidget {
     colorChoices.addItem("Rainbow");
     colorChoices.addItem("Black and White");
     colorChoices.addItem("Blue Green and Black");
+    colorChoices.addItem("Viridis");
     colorChoices.addItem("Simple Gradient");
 
     SelectColorButton color1 = new SelectColorButton(this, new QColor(0,0,160));
@@ -107,7 +108,7 @@ class SidebarPanel extends QWidget {
     colorChoices.currentIndexChanged.connect(
         (i) -> {
           //Simple gradient
-          if(i==5){
+          if(i==6){
             QColor color1Color = color1.getColor();
             QColor color2Color = color2.getColor();
             color1.show();
@@ -121,7 +122,8 @@ class SidebarPanel extends QWidget {
                 case 1 -> ColorMode.RANDOM;
                 case 2 -> ColorMode.HSV_WITH_BLACK;
                 case 3 -> ColorMode.BLACK_AND_WHITE;
-                case 4-> ColorMode.TESTING;
+                case 4-> ColorMode.GREEN_BLUE_BLACK;
+                case 5 -> ColorMode.VIRIDIS;
                 default -> ColorMode.BLACK_AND_WHITE;
               };
           color1.hide();
