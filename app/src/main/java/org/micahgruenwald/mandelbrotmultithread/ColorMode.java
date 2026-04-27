@@ -8,7 +8,13 @@ public interface ColorMode {
     public abstract int calcColor(double lightness);
     public static final ColorMode GREEN_BLUE_BLACK = new ComplexGradient(new int[]{new Color(0, 0,0).getRGB(),new Color(200, 255,200).getRGB(),new Color(0, 0,255).getRGB(),new Color(200, 255,200).getRGB(),new Color(0, 0,0).getRGB()}, new float[]{0.0f,0.15f,0.5f,0.85f, 1.0f});
     public static final ColorMode ORANGE_BLACK_BLUE = new ComplexGradient(new int[]{new Color(0, 7, 100).getRGB(), new Color( 32, 107, 203).getRGB(), new Color(237, 255, 255).getRGB(), new Color(255, 170,   0).getRGB(), new Color(  0,   2,   0).getRGB(), new Color(  0,   2,   0).getRGB()}, new float[]{0.0f,0.16f,0.42f,0.6425f,0.8575f,1.0f});
-        public static final ColorMode VIRIDIS = new ComplexGradient(new int[]{0x3F0B65,0x404C85,0x5AB080, 0x9AD35D,0xF9E855,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
+    /*
+    The following few gradients (going up to Random), were heavily inspired by:
+    @link{https://matplotlib.org/stable/_images/sphx_glr_colormap_reference_001_2_00x.png}
+    */
+    public static final ColorMode VIRIDIS = new ComplexGradient(new int[]{0x3F0B65,0x404C85,0x5AB080, 0x9AD35D,0xF9E855,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
+    public static final ColorMode INFERNO = new ComplexGradient(new int[]{0,0x7E1A9F,0xAD4154,0xED9D39,0xEAEABA,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
+        public static final ColorMode PLASMA = new ComplexGradient(new int[]{0x0E0782,0x7C199F, 0xBE5275,0xEA9853,0xF0F757,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
     public static final ColorMode RANDOM = new ColorMode() {
         private int randomOffset = new Random().nextInt();
 
