@@ -14,9 +14,17 @@ public interface ColorMode {
     */
     public static final ColorMode VIRIDIS = new ComplexGradient(new int[]{0x3F0B65,0x404C85,0x5AB080, 0x9AD35D,0xF9E855,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
     public static final ColorMode INFERNO = new ComplexGradient(new int[]{0,0x7E1A9F,0xAD4154,0xED9D39,0xEAEABA,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
-        public static final ColorMode PLASMA = new ComplexGradient(new int[]{0x0E0782,0x7C199F, 0xBE5275,0xEA9853,0xF0F757,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
+    public static final ColorMode PLASMA = new ComplexGradient(new int[]{0x0E0782,0x7C199F, 0xBE5275,0xEA9853,0xF0F757,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
+    public static final ColorMode MAGMA= new ComplexGradient(new int[]{0,0x37126D,0xCA526B,0xF3B381,0xEBECBA,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
+    public static final ColorMode CIVIDIS = new ComplexGradient(new int[]{0x0A224D,0x4A5169, 0x8D897A,0xD1C26D,0xEEDD58,0}, new float[]{0.0f,0.25f, 0.5f, 0.75f, .95f, 1.0f});
+    /*
+    These were inspired by @link{https://bertbaron.github.io/mandelbrot/?params=eyJjZW50ZXIiOlt7ImJpZ0ludCI6Ii0yMTQyMTE0NzcwMDUwMDM2NzMiLCJzY2FsZSI6NTh9LHsiYmlnSW50IjoiNjY4MTQ1MjkwOTc0NzA5NTciLCJzY2FsZSI6NTh9XSwiem9vbSI6eyJiaWdJbnQiOiI1MTc5NzAxODUzNDk1NDUyMjUiLCJzY2FsZSI6NTh9LCJtYXhfaXRlciI6MTAwMCwic21vb3RoIjp0cnVlLCJwYWxldHRlIjp7ImlkIjoib2NlYW4iLCJkZW5zaXR5IjoxLCJyb3RhdGUiOjB9fQ%3D%3D#}
+    */
+    public static final ColorMode LAVA = new ComplexGradient(new int[]{0,0xBE3E1E,0xFEF963,0xFFFFFF,0xFEF963,0xBE3E1E,0}, new float[]{0.0f,0.2f, 0.4f, 0.5f, 0.7f, .95f, 1.0f});
+    public static final ColorMode OCEAN = new ComplexGradient(new int[]{0x000034,0x184074,0x5498f8,0xFFFFFF,0x5498f8,0x184074,0x000000}, new float[]{0.0f,0.2f, 0.4f, 0.5f, 0.7f, .95f, 1.0f});
+    public static final ColorMode POP = new ComplexGradient(new int[]{0xEA3524,0xFBE94E,0x51A02D,0x0201ED,0xDD30E3,0xF5BDCB,0xEC755A,0x75FBF1,0x72F54B,0xEA332E,0x000000}, new float[]{0.0f,0.1f,0.2f,0.3f,0.4f,0.5f,0.6f,0.7f,0.8f, 0.9f, 1.0f});
     public static final ColorMode RANDOM = new ColorMode() {
-        private int randomOffset = new Random().nextInt();
+        private final int randomOffset = new Random().nextInt();
 
         public int calcColor(double lightness) {
             if (lightness == 1) {
