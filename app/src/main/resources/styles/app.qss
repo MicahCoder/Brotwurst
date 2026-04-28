@@ -1,0 +1,16 @@
+QWidget { background: #0f1115; color: #e6e6e6; font-family: "Segoe UI", Arial, sans-serif; }
+QPushButton { background: #4CAF50; color: white; border-radius:6px; padding:6px 12px; }
+QPushButton:hover { background: #45a049; }
+QPushButton:pressed { background: #3e8e41; }
+QPushButton:disabled { background: #555; color: #999; }
+
+QLabel { color: #d6d6d6; }
+
+QSlider::groove:horizontal { height:6px; background:#333; border-radius:3px; }
+QSlider::handle:horizontal { width:14px; background:#bbb; border-radius:7px; margin:-5px 0; }
+
+QScrollBar:vertical { background: transparent; width:12px; }
+QScrollBar::handle:vertical { background:#3a3a3a; border-radius:6px; }
+
+/* Sidebar sizes and styling */
+QWidget#sidebar { background: #0b0c0e; }

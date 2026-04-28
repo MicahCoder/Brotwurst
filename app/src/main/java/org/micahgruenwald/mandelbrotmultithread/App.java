@@ -1,6 +1,8 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -17,6 +19,25 @@ public class App {
   public static final BufferedImage stationaryImage = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
   public static void main(String[] args) {
     QApplication.initialize(args);
+    try (InputStream in = App.class.getResourceAsStream("/styles/app.qss")) {
+      String style = null;
+      if (in != null) {
+        style = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+      } else {
+        Path p = Path.of("app/src/main/resources/styles/app.qss");
+        if (Files.exists(p)) {
+          style = Files.readString(p);
+        }
+      }
+      if (style != null && !style.isEmpty()) {
+        QApplication appInstance = QApplication.instance();
+        if (appInstance != null) {
+          appInstance.setStyleSheet(style);
+        }
+      }
+    } catch (Exception e) {
+      System.err.println("Could not load stylesheet: " + e.getMessage());
+    }
 
     QWidget window = new QWidget();
     window.setWindowTitle("Mandelbrot Renderer");
@@ -57,28 +78,5 @@ public class App {
 
     QApplication.exec();
     QApplication.shutdown();
-  }
-
-  private static String findImagePath() {
-    Path cwd = Path.of("").toAbsolutePath().normalize();
-
-    Path[] candidates =
-        new Path[] {
-          cwd.resolve(
-              "app/src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png"),
-          cwd.resolve(
-              "src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png"),
-          cwd.resolve(
-              "../app/src/test/java/org/micahgruenwald/mandelbrotmultithread/testOutput/saved.png")
-        };
-
-    for (Path candidate : candidates) {
-      Path normalized = candidate.normalize();
-      if (Files.exists(normalized)) {
-        return normalized.toString();
-      }
-    }
-
-    return candidates[0].normalize().toString();
   }
 }
