@@ -200,8 +200,8 @@ class SidebarPanel extends QWidget {
     QPushButton saveButton = new QPushButton("Save");
 
     SavePopup savePopup = new SavePopup(this, manager);
-    zoomInButton.clicked.connect(imageView::zoomIn);
-    zoomOutButton.clicked.connect(imageView::zoomOut);
+    zoomInButton.clicked.connect(imageView::zoomOutCenter);
+    zoomOutButton.clicked.connect(imageView::zoomInCenter);
     resetZoomButton.clicked.connect(imageView::resetZoom);
     saveButton.clicked.connect(savePopup::exec);
     // saveButton.clicked.connect(()->{

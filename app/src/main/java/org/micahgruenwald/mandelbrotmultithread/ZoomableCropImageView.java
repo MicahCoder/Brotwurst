@@ -72,6 +72,24 @@ class ZoomableCropImageView extends QWidget {
       setImage(manager.getQPixmap());
     }
 
+    void zoomInCenter() {
+      RenderArea area = manager.getRenderArea();
+      double xWidth = area.xWidth() * ZOOM_STEP;
+      double yWidth = area.yWidth() * ZOOM_STEP;
+      manager.setRenderArea(new RenderArea(area.xCenter(),area.yCenter(),xWidth,yWidth));
+      renderWindow(true);
+      setImage(manager.getQPixmap());
+    }
+
+    void zoomOutCenter() {
+      RenderArea area = manager.getRenderArea();
+      double xWidth = area.xWidth() / ZOOM_STEP;
+      double yWidth = area.yWidth() / ZOOM_STEP;
+      manager.setRenderArea(new RenderArea(area.xCenter(),area.yCenter(),xWidth,yWidth));
+      renderWindow(true);
+      setImage(manager.getQPixmap());
+    }
+
     void resetZoom() {
       if(Calculator.getJuliaMode()){
         manager.setRenderArea(Calculator.DEFAULT_JULIA_AREA);
