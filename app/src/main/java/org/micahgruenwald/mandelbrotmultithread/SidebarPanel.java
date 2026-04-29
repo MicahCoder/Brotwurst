@@ -200,10 +200,15 @@ class SidebarPanel extends QWidget {
     QPushButton saveButton = new QPushButton("Save");
 
     SavePopup savePopup = new SavePopup(this, manager);
+
+    QPushButton setCordsButton = new QPushButton("Set Coordinates");
+
+    CoordinatePopup setCordsPopup = new CoordinatePopup(this, manager);
     zoomInButton.clicked.connect(imageView::zoomOutCenter);
     zoomOutButton.clicked.connect(imageView::zoomInCenter);
     resetZoomButton.clicked.connect(imageView::resetZoom);
     saveButton.clicked.connect(savePopup::exec);
+    setCordsButton.clicked.connect(setCordsPopup::exec);
     // saveButton.clicked.connect(()->{
     //   try {
     //   File outputfile =
@@ -226,13 +231,14 @@ class SidebarPanel extends QWidget {
     sidebarLayout.addWidget(new QLabel("Max Iterations"));
     sidebarLayout.addWidget(iterationNumber);
     sidebarLayout.addWidget(saveButton);
+    sidebarLayout.addWidget(setCordsButton);
     sidebarLayout.addStretch(1);
 
     setLayout(sidebarLayout);
     setMinimumWidth(160);
   }
 
-  private void renderWindow(boolean moving){
+  protected void renderWindow(boolean moving){
     manager.setImage(moving?App.movingImage:App.stationaryImage);
     manager.render();
     imageView.setImage(manager.getQPixmap());
