@@ -14,20 +14,31 @@ public class Manager{
     private final int threadCount;
     private final ArrayList<MandelbrotThread> threads;
     private RenderArea area;
+
+    /*
+        Define a mandelbrot thread manager. (this breaks rendering an image into multiples threads)
+        @param threadCount - the amount of threads used to render the set
+        @param area - defines the coordinates for rendering
+        @param image - defines the file the manager is writing to. 
+    */
     public Manager(int threadCount, RenderArea area, BufferedImage image){
         this.threadCount = threadCount;
         this.image = image;
         this.area = area;
         threads = new ArrayList<>(threadCount);
     }
+    //returns the image
     public BufferedImage getImage(){
         return image;
     }
-
+    //Sets the buffered image
     public void setImage(BufferedImage image){
         this.image = image;
     }
-
+    /*
+    takes an amount of rows and an amount of threads, and breaks them down into equal sized tasks. 
+    E.g 18 broken into 5 threads goes to lines of length [4,4,4,3,3]
+    */
     private static ArrayList<Integer> rowLengths(int dividend, int divisor){
         ArrayList<Integer> rowLengths = new ArrayList<>(divisor);
         int base = dividend / divisor;
@@ -41,19 +52,27 @@ public class Manager{
         }
         return rowLengths;
     }
+
+    //Set's the area the manager is rendering
     public void setRenderArea(RenderArea renderArea){
         this.area = renderArea;
     }
 
+    //Gets the render area.
     public RenderArea getRenderArea(){
         return area;
     }
+
+    //Render the image on the bufferedImagefile
     public void render(){
+        //Break the image into rowLengths
         ArrayList<Integer> rowLengths = rowLengths(image.getHeight(), threadCount);
+        //Makes sure there are no old threads. 
         threads.clear();
+
+        //Define constants for iteration
         double x0 = area.x0();
         double y0 = area.y0();
-        double dx = area.xWidth() / (image.getWidth());
         double dy = area.yWidth() / (image.getHeight());
         double x1 = area.x1();
         double y1 = area.y1();
