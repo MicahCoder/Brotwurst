@@ -14,8 +14,9 @@ import io.qt.widgets.QSplitter;
 import io.qt.widgets.QWidget;
 
 public class App {
-
+  //This image is written too at low res. Change resolution to make a higher res while moving. 
   public static final BufferedImage movingImage = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
+  //This image is rendered for high res, while we're still. 
   public static final BufferedImage stationaryImage = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
   public static void main(String[] args) {
     QApplication.initialize(args);
