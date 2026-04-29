@@ -41,12 +41,14 @@ class SidebarPanel extends QWidget {
 
     QDoubleSpinBox cx = new QDoubleSpinBox();
     cx.setSingleStep(0.01);
-    cx.setRange(-1.0, 1.0);
+    cx.setRange(-2.0, 2.0);
+    cx.setDecimals(4);
     cx.setValue(-0.4);
 
     QDoubleSpinBox cy = new QDoubleSpinBox();
     cy.setSingleStep(0.01);
-    cy.setRange(-1.0, 1.0);
+    cy.setRange(-2.0, 2.0);
+    cy.setDecimals(4);
     cy.setValue(0.6);
     QSpinBox n = new QSpinBox();
     n.setSingleStep(1);
@@ -77,7 +79,7 @@ class SidebarPanel extends QWidget {
     });
 
     QComboBox colorChoices = new QComboBox();
-    colorChoices.addItem("Orange Black and Blue");
+    colorChoices.addItem("Classic");
     colorChoices.addItem("Random Colors");
     colorChoices.addItem("Rainbow");
     colorChoices.addItem("Black and White");
