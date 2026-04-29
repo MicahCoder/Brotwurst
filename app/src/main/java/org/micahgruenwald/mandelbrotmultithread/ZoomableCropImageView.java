@@ -5,9 +5,11 @@ import io.qt.core.QPointF;
 import io.qt.core.QTimer;
 import io.qt.core.Qt;
 import io.qt.gui.QCursor;
+import io.qt.gui.QPainterPath;
 import io.qt.gui.QKeyEvent;
 import io.qt.gui.QPaintEvent;
 import io.qt.gui.QPainter;
+import io.qt.gui.QColor;
 import io.qt.gui.QPixmap;
 import io.qt.gui.QWheelEvent;
 import io.qt.widgets.QWidget;
@@ -17,6 +19,7 @@ class ZoomableCropImageView extends QWidget {
     private String errorText = "No image loaded";
     private double zoomFactor = 1.0;
     private QTimer timer;
+  private static final int CORNER_RADIUS = 18;
     private static final double ZOOM_STEP = 1.05;
     private static final double MAX_ZOOM = 20.0;
     private static final double DRAG_FACT = 0.01;
@@ -27,6 +30,7 @@ class ZoomableCropImageView extends QWidget {
     public ZoomableCropImageView(Manager manager) {
       this.manager = manager;
       setFocusPolicy(Qt.FocusPolicy.StrongFocus);
+      setAttribute(Qt.WidgetAttribute.WA_StyledBackground, true);
       timer = new QTimer();
       timer.setInterval(100);
       timer.setSingleShot(true);
@@ -110,13 +114,21 @@ class ZoomableCropImageView extends QWidget {
 
       QPainter painter = new QPainter(this);
       try {
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing, true);
+        painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform, true);
+
+        int viewWidth = Math.max(1, width());
+        int viewHeight = Math.max(1, height());
+        QPainterPath clipPath = new QPainterPath();
+        clipPath.addRoundedRect(0, 0, viewWidth, viewHeight, CORNER_RADIUS, CORNER_RADIUS);
+        painter.setClipPath(clipPath);
+        painter.fillPath(clipPath, new QColor("#0f1115"));
+
         if (image == null || image.isNull()) {
           painter.drawText(rect(), Qt.AlignmentFlag.AlignCenter.value(), errorText);
           return;
         }
 
-        int viewWidth = Math.max(1, width());
-        int viewHeight = Math.max(1, height());
         int imageWidth = image.width();
         int imageHeight = image.height();
 

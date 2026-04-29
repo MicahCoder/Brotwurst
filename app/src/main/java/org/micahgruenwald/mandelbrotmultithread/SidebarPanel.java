@@ -18,12 +18,10 @@ class SidebarPanel extends QWidget {
     this.manager = manager;
     this.imageView = imageView;
     QVBoxLayout sidebarLayout = new QVBoxLayout();
-    QLabel titleLabel = new QLabel("Mandelbrot Explorer");
-    titleLabel.font().setPixelSize(25);
-    titleLabel.font().setBold(true);
-    sidebarLayout.addWidget(titleLabel);
 
-    sidebarLayout.addWidget(new QLabel("Zoom Controls"));
+    QLabel title = new QLabel("Zoom Controls");
+    title.setObjectName("controlsLabel");
+    sidebarLayout.addWidget(title);
     QHBoxLayout zoomButtonsLayout = new QHBoxLayout();
     zoomButtonsLayout.setSpacing(5);
     QPushButton zoomInButton = new QPushButton("+");
@@ -221,14 +219,20 @@ class SidebarPanel extends QWidget {
 
 
 
-    sidebarLayout.addWidget(new QLabel("Color Choices"));
+    QLabel colorChoicesLabel = new QLabel("Color Scheme");
+    colorChoicesLabel.setObjectName("controlsLabel");
+    sidebarLayout.addWidget(colorChoicesLabel);
     sidebarLayout.addWidget(colorChoices);
     sidebarLayout.addLayout(simpleGradient);
-    sidebarLayout.addWidget(new QLabel("Fractal Type Choices"));
+    QLabel fractalTypeLabel = new QLabel("Fractal Type");
+    fractalTypeLabel.setObjectName("controlsLabel");
+    sidebarLayout.addWidget(fractalTypeLabel);
     sidebarLayout.addWidget(fractalType);
     sidebarLayout.addLayout(cxcynLabel); 
-    sidebarLayout.addLayout(cxcyn); 
-    sidebarLayout.addWidget(new QLabel("Max Iterations"));
+    sidebarLayout.addLayout(cxcyn);
+    QLabel iterationLabel = new QLabel("Max Iterations");
+    iterationLabel.setObjectName("controlsLabel");
+    sidebarLayout.addWidget(iterationLabel);
     sidebarLayout.addWidget(iterationNumber);
     sidebarLayout.addWidget(saveButton);
     sidebarLayout.addWidget(setCordsButton);
