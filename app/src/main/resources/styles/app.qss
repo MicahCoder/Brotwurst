@@ -1,3 +1,4 @@
+/* This is the stylesheet for the application. QSS is very similar to CSS, so it's easy to work with */
 QWidget { background: #0f1115; color: #e6e6e6; font-family: "Segoe UI", Arial, sans-serif; }
 QPushButton { background: #4CAF50; color: white; border-radius:6px; padding:6px 12px; }
 QPushButton:hover { background: #45a049; }

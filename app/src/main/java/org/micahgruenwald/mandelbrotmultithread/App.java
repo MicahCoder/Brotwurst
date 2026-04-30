@@ -14,11 +14,11 @@ import io.qt.widgets.QSplitter;
 import io.qt.widgets.QWidget;
 
 public class App {
-  //This image is written too at low res. Change resolution to make a higher res while moving. 
+  //This image is written to at low res. Change resolution to make a higher res while moving. 
   public static final BufferedImage movingImage = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
   //This image is rendered for high res, while we're still. 
   public static final BufferedImage stationaryImage = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
-  //Main class of the project. This is run with ./gradlew run
+  //Main class/entrypoint of the project. This is run with ./gradlew run
   public static void main(String[] args) {
     //Begin the application
     QApplication.initialize(args);
@@ -27,7 +27,7 @@ public class App {
       if (in != null) {
         style = new String(in.readAllBytes(), StandardCharsets.UTF_8);
       } else {
-        //Attatch style guide
+        //Load QSS stylesheet
         Path p = Path.of("app/src/main/resources/styles/app.qss");
         if (Files.exists(p)) {
           style = Files.readString(p);
@@ -42,7 +42,7 @@ public class App {
     } catch (Exception e) {
       System.err.println("Could not load stylesheet: " + e.getMessage());
     }
-    //Create main windown.
+    //Create main window.
     QWidget window = new QWidget();
     window.setWindowTitle("Mandelbrot Renderer");
     window.resize(900, 600);
@@ -58,7 +58,7 @@ public class App {
 
     //Create manager, this does all the calculations
     Manager manager = new Manager(6, Calculator.DEFAULT_MANDELBROT_AREA, stationaryImage);
-    //Render the manager. 
+    //Call the manager to render
     manager.render();
 
     //Create an ImageView. This object allows us to zoom and all. 
@@ -91,7 +91,7 @@ public class App {
     //Show the window
     window.show();
 
-    //Run this thing. 
+    //Run everything
     QApplication.exec();
     QApplication.shutdown();
   }
