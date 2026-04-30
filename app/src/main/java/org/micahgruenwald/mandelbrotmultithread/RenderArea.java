@@ -1,16 +1,37 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
+/**
+ * @param xCenter the center of the region, x coordinate
+ * @param yCenter the center of the region, y coordinate
+ * @param xWidth the width of the region
+ * @param yWidth the height of the region.
+ */
 public record RenderArea(double xCenter, double yCenter, double xWidth, double yWidth) {
-    public double x0(){
-        return xCenter - xWidth/2;
-    }
-    public double y0(){
-        return yCenter - yWidth/2;
-    }
-    public double x1(){
-        return xCenter + xWidth/2;
-    }
-    public double y1(){
-        return yCenter + yWidth/2;
-    }
+  /**
+   * @return the minimum x coordinate
+   */
+  public double x0() {
+    return xCenter - xWidth / 2;
+  }
+
+  /**
+   * @return the minimum y coordinate
+   */
+  public double y0() {
+    return yCenter - yWidth / 2;
+  }
+
+  /**
+   * @return the maximum x coordinate
+   */
+  public double x1() {
+    return xCenter + xWidth / 2;
+  }
+
+  /**
+   * @return maximum y coordinate
+   */
+  public double y1() {
+    return yCenter + yWidth / 2;
+  }
 }
