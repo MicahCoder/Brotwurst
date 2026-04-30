@@ -1,5 +1,11 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import io.qt.core.QTimer;
 import io.qt.core.Qt;
 import io.qt.widgets.QApplication;
@@ -8,11 +14,6 @@ import io.qt.widgets.QSizePolicy;
 import io.qt.widgets.QSplitter;
 import io.qt.widgets.QVBoxLayout;
 import io.qt.widgets.QWidget;
-import java.awt.image.BufferedImage;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class App {
   private static void positionFloatingBar(QWidget window, QLabel floatingBar) {
@@ -121,7 +122,7 @@ public class App {
     // Small status bar in the bottom right
     QLabel floatingBar =
         new QLabel(
-            "X=" + manager.getRenderArea().xCenter() + ", Y=" + manager.getRenderArea().yCenter(),
+            "X =" + manager.getRenderArea().xCenter() + ", Y =" + manager.getRenderArea().yCenter() + ", Width = " + manager.getRenderArea().xWidth(),
             window);
     floatingBar.setObjectName("floatingBar");
     floatingBar.setStyleSheet(
@@ -135,10 +136,7 @@ public class App {
     refreshTimer.timeout.connect(
         () -> {
           floatingBar.setText(
-              "X="
-                  + (float) manager.getRenderArea().xCenter()
-                  + ", Y="
-                  + (float) manager.getRenderArea().yCenter());
+              "X =" + (float)manager.getRenderArea().xCenter() + ", Y =" + (float)manager.getRenderArea().yCenter() + ", Width = " + (float)manager.getRenderArea().xWidth());
           positionFloatingBar(window, floatingBar);
         });
     refreshTimer.start();
