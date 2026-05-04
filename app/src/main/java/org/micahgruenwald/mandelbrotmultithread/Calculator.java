@@ -1,6 +1,9 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
 public class Calculator {
+  /**
+   * @author mgruenwald
+   */
   // The amount of iterations the calculator will run until it breaks for rednering.
   private static int maxIterations = 600;
   // The way the calculator transaltes valeus [0.0,1.0] into a color for rendering.
@@ -20,6 +23,11 @@ public class Calculator {
 
   // new ColorMode.ComplexGradient(new int[]{new Color(1.0f, 0.0f, 0.0f).getRGB(),new Color(0.0f,
   // 1.0f,0.0f).getRGB()}, new float[]{0.0f, 1.0f});
+    /**
+   * @author mgruenwald
+   * @param x x cord
+   * @param y y cord
+   */
   public static double render(double x, double y) {
     if (!juliaMode) {
       // Render a mandelbrot set
@@ -34,7 +42,12 @@ public class Calculator {
   }
 
   // Finds the value of the mandelbrot set at (x,y)
-  public static double mandelbrotValue(double x, double y) {
+      /**
+   * @author mgruenwald, psuedocode found at @link{https://en.wikipedia.org/wiki/Mandelbrot_set#Computer_drawings}
+   * @param x x cord
+   * @param y y cord
+   */
+  private static double mandelbrotValue(double x, double y) {
     double x2 = 0.0;
     double y2 = 0.0;
     double w = 0.0;
@@ -53,7 +66,12 @@ public class Calculator {
   }
 
   // Finds the value of the julia set at (x,y)
-  public static double juliaValue(double x, double y) {
+      /**
+   * @author mgruenwald, psuedocode found @link{https://en.wikipedia.org/wiki/Julia_set#Pseudocode_for_multi-Julia_sets}
+   * @param x x cord
+   * @param y y cord
+   */
+  private static double juliaValue(double x, double y) {
     int iteration = 0;
     // System.out.print("RInit: " + R);
     while (x * x + y * y < R * R && iteration < maxIterations) {
@@ -69,7 +87,13 @@ public class Calculator {
 
   // n is the order of the julia set. n = 2 is the normal julia set.
   // Finds the escape radius.
-  public static int escapeRadius(double cx, double cy, double n) {
+      /**
+   * @author mgruenwald
+   * @param cx x complex cord
+   * @param cy y complex cord
+   * @param n order
+   */
+  private static int escapeRadius(double cx, double cy, double n) {
     int r = 1;
     double v = Math.sqrt(cx * cx + cy * cy);
     while (Math.pow(r, n) - r < v) {
@@ -79,6 +103,11 @@ public class Calculator {
   }
 
   // Finds the value of the julia set at (x,y) (order 2)
+  /**
+   * @author mgruenwald, psuedocode found @link{https://en.wikipedia.org/wiki/Julia_set#Pseudocode_for_normal_Julia_sets}
+   * @param x
+   * @param y
+   */
   public static double julia2Value(double x, double y) {
     int iteration = 0;
     // System.out.print("RInit: " + R);
@@ -92,25 +121,36 @@ public class Calculator {
   }
 
   // Sets the max iterations
+  /**
+   * @author mgruenwald
+   */
   public static void setMaxIterations(int maxIts) {
     maxIterations = maxIts;
   }
-
+  /**
+   * @author mgruenwald
+   */
   // Get the max iterations
   public static int getMaxIterations() {
     return maxIterations;
   }
-
+  /**
+   * @author mgruenwald
+   */
   // set the color mode
   public static void setColorMode(ColorMode colorMode) {
     COLOR_CALC = colorMode;
   }
-
+  /**
+   * @author mgruenwald
+   */
   // Get the colorMode
   public static ColorMode getColorCalc() {
     return COLOR_CALC;
   }
-
+  /**
+   * @author mgruenwald
+   */
   // Set Julia Settinhs
   public static void setJuliaValues(double cx, double cy, double n) {
     Calculator.cx = cx;
@@ -118,12 +158,16 @@ public class Calculator {
     Calculator.n = n;
     Calculator.R = escapeRadius(cx, cy, n);
   }
-
+  /**
+   * @author mgruenwald
+   */
   // Set the julia mdoe
   public static void setJuliaMode(boolean state) {
     Calculator.juliaMode = state;
   }
-
+  /**
+   * @author mgruenwald
+   */
   // get the julia mode.
   public static boolean getJuliaMode() {
     return Calculator.juliaMode;

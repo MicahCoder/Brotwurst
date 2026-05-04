@@ -31,6 +31,7 @@ public class MandelbrotThread extends Thread {
    * @param i1 the ending row index in the image for this thread's computation
    * @param j1 the ending column index in the image for this thread's computation
    * @param image the BufferedImage where the computed pixel colors will be stored
+   * @author mgruenwald
    */
   public MandelbrotThread(
       double x0,
@@ -57,6 +58,7 @@ public class MandelbrotThread extends Thread {
   /**
    * Executes the thread to compute and set pixel colors for its assigned portion of the Mandelbrot
    * image.
+   * @author mgruenwald
    */
   public void run() {
     double dx = (x1 - x0) / (j1 - j0);
@@ -85,6 +87,7 @@ public class MandelbrotThread extends Thread {
    * Mandelbrot segment.
    *
    * @return the BufferedImage containing the computed Mandelbrot image segment
+   * @author mgruenwald
    */
   public BufferedImage getImage() {
     return image;

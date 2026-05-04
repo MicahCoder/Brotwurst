@@ -17,6 +17,7 @@ public class CoordinatePopup extends QDialog {
    *
    * @param parent the panel where the popup is stored
    * @param manager the rendering object
+   * @author mgruenwald
    */
   public CoordinatePopup(SidebarPanel parent, Manager manager) {
     super(parent);

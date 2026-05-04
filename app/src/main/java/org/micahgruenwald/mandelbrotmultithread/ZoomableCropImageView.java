@@ -4,12 +4,12 @@ import io.qt.core.QPoint;
 import io.qt.core.QPointF;
 import io.qt.core.QTimer;
 import io.qt.core.Qt;
+import io.qt.gui.QColor;
 import io.qt.gui.QCursor;
-import io.qt.gui.QPainterPath;
 import io.qt.gui.QKeyEvent;
 import io.qt.gui.QPaintEvent;
 import io.qt.gui.QPainter;
-import io.qt.gui.QColor;
+import io.qt.gui.QPainterPath;
 import io.qt.gui.QPixmap;
 import io.qt.gui.QWheelEvent;
 import io.qt.widgets.QWidget;
@@ -30,6 +30,7 @@ class ZoomableCropImageView extends QWidget {
     /**
      * This makes a window where you can zoom in on a render
      * @param manager the manager for rendering. 
+     * @author bmalia
      */
     public ZoomableCropImageView(Manager manager) {
       this.manager = manager;

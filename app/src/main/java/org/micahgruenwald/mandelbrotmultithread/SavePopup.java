@@ -1,5 +1,11 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import io.qt.gui.QIntValidator;
 import io.qt.widgets.QDialog;
 import io.qt.widgets.QFileDialog;
@@ -9,10 +15,6 @@ import io.qt.widgets.QLineEdit;
 import io.qt.widgets.QPushButton;
 import io.qt.widgets.QVBoxLayout;
 import io.qt.widgets.QWidget;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 // Simple dialog that allows for saving an image of the render.
 public class SavePopup extends QDialog {
@@ -21,6 +23,7 @@ public class SavePopup extends QDialog {
   /**
    * @param parent the parent widget where this popup is saved
    * @param manager the manager object this popup uses to render.
+   * @author mgruenwald
    */
   public SavePopup(QWidget parent, Manager manager) {
     super(parent);
@@ -71,6 +74,7 @@ public class SavePopup extends QDialog {
    * Sets the file path of the save to path
    *
    * @param path
+   * @author mgruenwald
    */
   private void setFilepath(String path) {
     this.filepath = path;

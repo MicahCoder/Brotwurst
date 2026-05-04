@@ -16,6 +16,11 @@ import io.qt.widgets.QVBoxLayout;
 import io.qt.widgets.QWidget;
 
 public class App {
+  /**
+   * @author bmalia
+   * @param window
+   * @param floatingBar
+   */
   private static void positionFloatingBar(QWidget window, QLabel floatingBar) {
     floatingBar.adjustSize();
     int margin = 12;
@@ -25,13 +30,21 @@ public class App {
   }
 
   // This image is written to at low res. Change resolution to make a higher res while moving.
+  /**@author mgruenwald */
   public static final BufferedImage movingImage =
       new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
   // This image is rendered for high res, while we're still.
+  /**
+   * @author mgruenwald 
+   */
   public static final BufferedImage stationaryImage =
       new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
 
   // Main class/entrypoint of the project. This is run with ./gradlew run
+  /**
+   * @author banks (primary)
+   * @author mgruenwald (secondary)
+   */
   public static void main(String[] args) {
     // Initialize the application
     QApplication.initialize(args);

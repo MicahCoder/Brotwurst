@@ -1,11 +1,13 @@
 package org.micahgruenwald.mandelbrotmultithread;
 
-import io.qt.core.QSize;
-import io.qt.gui.QPixmap;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
+
+import io.qt.core.QSize;
+import io.qt.gui.QPixmap;
 
 public class Manager {
   private BufferedImage image;
@@ -13,11 +15,12 @@ public class Manager {
   private final ArrayList<MandelbrotThread> threads;
   private RenderArea area;
 
-  /*
+  /**
       Define a mandelbrot thread manager. (this breaks rendering an image into multiple threads)
       @param threadCount - the amount of threads used to render the set
       @param area - defines the coordinates for rendering
       @param image - defines the file the manager is writing to.
+      @author mgruenwald
   */
   public Manager(int threadCount, RenderArea area, BufferedImage image) {
     this.threadCount = threadCount;
@@ -27,11 +30,13 @@ public class Manager {
   }
 
   // returns the image
+  /**@author mgruenwald */
   public BufferedImage getImage() {
     return image;
   }
 
   // Sets the buffered image
+    /**@author mgruenwald */
   public void setImage(BufferedImage image) {
     this.image = image;
   }
@@ -40,6 +45,7 @@ public class Manager {
   takes an amount of rows and an amount of threads, and breaks them down into equal sized tasks.
   E.g 18 broken into 5 threads goes to lines of length [4,4,4,3,3]
   */
+   /**@author mgruenwald */
   private static ArrayList<Integer> rowLengths(int dividend, int divisor) {
     ArrayList<Integer> rowLengths = new ArrayList<>(divisor);
     int base = dividend / divisor;
@@ -55,16 +61,19 @@ public class Manager {
   }
 
   // Sets the area the manager is rendering
+    /**@author mgruenwald */
   public void setRenderArea(RenderArea renderArea) {
     this.area = renderArea;
   }
 
   // Gets the render area.
+    /**@author mgruenwald */
   public RenderArea getRenderArea() {
     return area;
   }
 
   // Render the image on the bufferedImagefile
+    /**@author mgruenwald */
   public void render() {
     // Break the image into rowLengths
     ArrayList<Integer> rowLengths = rowLengths(image.getHeight(), threadCount);
@@ -114,6 +123,7 @@ public class Manager {
   }
 
   // Converts bufferedImage to a QPixmap(compatible with QT);
+    /**@author mgruenwald */
   public QPixmap getQPixmap() {
     // Initialize QPixmap with the correct dimensions
 

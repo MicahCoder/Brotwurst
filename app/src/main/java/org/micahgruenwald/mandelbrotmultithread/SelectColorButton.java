@@ -14,6 +14,8 @@ public class SelectColorButton extends QPushButton {
   /**
    * @param parent defines parent widget
    * @param color defines the intial color of the box.
+   * @author mgruenwald, heavily inspired from c++ code found @link{https://stackoverflow.com/questions/18257281/qt-color-picker-widget}
+   * 
    */
   public SelectColorButton(QWidget parent, QColor color) {
     super(parent);
